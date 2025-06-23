@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const Event = require("../models/Event");
 router.get("/", async (req, res) => {
   try {
     const events = await Event.find().sort({ date: 1, time: 1 });
@@ -43,7 +44,7 @@ router.get("/:id", async (req, res) => {
 });
 router.post("/", async (req, res) => {
   try {
-    const { title, description, date, time, location } = req.body;
+    const { title, description, date, time } = req.body;
     if (!title || !date || !time) {
       return res.status(400).json({
         success: false,
